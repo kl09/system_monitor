@@ -1,0 +1,3 @@
+{
+  "dsn": "postgres://user:password@host:13429/db_name?sslmode=require"
+}

@@ -1,0 +1,13 @@
+*.pyc
+*.iml
+.python-version
+.DS_Store
+.coverage
+.pytest_cache
+*/__pycache__
+/venv
+/env
+.idea
+/config/kafka.json
+/config/psql.json
+/config/ssl/*

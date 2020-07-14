@@ -1,0 +1,11 @@
+{
+  "topic": "website_checks",
+  "kwargs": {
+    "bootstrap_servers": "kafka-3799a42b-kl09-9c42.aivencloud.com:13431",
+    "security_protocol": "SSL",
+    "ssl_check_hostname": true,
+    "ssl_cafile": "config/ssl/kafka/ca.pem",
+    "ssl_certfile": "config/ssl/kafka/service.cert",
+    "ssl_keyfile": "config/ssl/kafka/service.key"
+  }
+}

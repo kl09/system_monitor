@@ -1,0 +1,40 @@
+[MASTER]
+# A comma-separated list of package or module names from where C extensions may
+# be loaded. Extensions are loading into the active Python interpreter and may
+# run arbitrary code
+extension-pkg-whitelist=
+    ujson,
+
+[FORMAT]
+max-line-length = 120
+
+[MESSAGES CONTROL]
+disable =
+    R,
+    fixme,
+    missing-docstring,
+    no-init,
+    invalid-name,
+    unused-argument,
+    no-member,
+    maybe-no-member,
+    protected-access,
+    attribute-defined-outside-init,
+    no-value-for-parameter,
+    old-style-class,
+    super-on-old-class,
+    import-error,
+    not-callable,
+    unexpected-keyword-arg,
+    star-args,
+    method-hidden,
+    abstract-method,
+    logging-format-interpolation,
+    too-many-lines,
+    unsupported-membership-test,
+    unused-variable,
+    arguments-differ,
+    duplicate-string-formatting-argument,
+
+[REPORTS]
+reports = no

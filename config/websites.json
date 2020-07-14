@@ -1,0 +1,12 @@
+[
+  {
+    "url": "https://google.com",
+    "check_interval": 2,
+    "regexp_pattern": "html"
+  },
+  {
+    "url": "https://www.yahoo.com/",
+    "check_interval": 3,
+    "regexp_pattern": ""
+  }
+]

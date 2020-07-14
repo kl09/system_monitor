@@ -1,0 +1,34 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:11.3-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: monitor_event
+      POSTGRES_PASSWORD: monitor_event
+      POSTGRES_DB: monitor_event_test
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka:2.11-1.1.1
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_CREATE_TOPICS: "website_checks:1:1"
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,SASL_PLAINTEXT://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,SASL_PLAINTEXT://localhost:9093
+      KAFKA_SASL_ENABLED_MECHANISMS: "PLAIN,SCRAM-SHA-256,SCRAM-SHA-512"
+      KAFKA_OPTS: '-Djava.security.auth.login.config=/opt/kafka/config/kafka_server_jaas.conf'
+      CUSTOM_INIT_SCRIPT: |-
+        echo -e 'KafkaServer {\norg.apache.kafka.common.security.scram.ScramLoginModule required\n username="adminuser"\n password="admin-secret";\n  };' > /opt/kafka/config/kafka_server_jaas.conf;
+        /opt/kafka/bin/kafka-configs.sh --zookeeper zookeeper:2181 --alter --add-config 'SCRAM-SHA-256=[password=admin-secret-256],SCRAM-SHA-512=[password=admin-secret-512]' --entity-type users --entity-name adminuser
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
